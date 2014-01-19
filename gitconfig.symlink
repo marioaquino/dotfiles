@@ -73,3 +73,8 @@
 
 [include]
     path = .my_gitconfig
+[user]
+	name = Mario Aquino
+	email = mario@outpace.com
+[core]
+	editor = /usr/bin/vim

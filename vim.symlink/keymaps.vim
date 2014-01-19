@@ -26,11 +26,6 @@ inoremap <C-S>  <C-O>:update<CR>
 noremap  <C-Z>  u
 inoremap <C-Z>  <C-O>u
 
-" F2 inserts the date and time at the cursor.
-"
-inoremap <F2>   <C-R>=strftime("%c")<CR>
-nmap     <F2>   a<F2><Esc>
-
 " F7 formats the current/highlighted paragraph.
 "
 " XXX: Consider changing this to gwap to maintain logical cursor position.
@@ -150,34 +145,34 @@ let g:blockle_mapping = '<Leader>bl'
 nnoremap <silent> <F8> :TlistToggle<CR>
 
 " Ctrl-T for Command-T
-  map <C-t> :CommandT<CR>
-  imap <C-t> <Esc>:CommandT<CR>
+map <C-t> :CommandT<CR>
+imap <C-t> <Esc>:CommandT<CR>
 
 " Ctrl-Shift-F for Ack
-  map <C-F> :Ack<space>
+"map <C-S-F> :Ack<space>
 
 " Alt-/ to toggle comments
-  map <A-/> <plug>NERDCommenterToggle<CR>
-  imap <A-/> <Esc><plug>NERDCommenterToggle<CR>i
-  map /  <plug>NERDCommenterToggle<CR>
-  imap /  <Esc><plug>NERDCommenterToggle<CR>i
+map <A-/> <plug>NERDCommenterToggle<CR>
+imap <A-/> <Esc><plug>NERDCommenterToggle<CR>i
+map /  <plug>NERDCommenterToggle<CR>
+imap /  <Esc><plug>NERDCommenterToggle<CR>i
 
 " Alt-][ to increase/decrease indentation
-  vmap <A-]> >gv
-  vmap <A-[> <gv
+vmap <A-]> >gv
+vmap <A-[> <gv
 
 " Ctrl-Option-ArrowKey to switch viewports
-  map <C-S-Up> <C-w>k
-  imap <C-S-Up> <Esc> <C-w>k
-  map <C-S-Down> <C-w>j
-  imap <C-S-Down> <Esc> <C-w>j
-  map <C-S-Right> <C-w>l
-  imap <C-S-Right> <Esc> <C-w>l
-  map <C-S-Left> <C-w>h
-  imap <C-S-Left> <C-w>h
+map <C-S-Up> <C-w>k
+imap <C-S-Up> <Esc> <C-w>k
+map <C-S-Down> <C-w>j
+imap <C-S-Down> <Esc> <C-w>j
+map <C-S-Right> <C-w>l
+imap <C-S-Right> <Esc> <C-w>l
+map <C-S-Left> <C-w>h
+imap <C-S-Left> <C-w>h
 
  " Start Command-t with leader-t
-  map <leader>t :CommandT<CR>
+map <leader>t :CommandT<CR>
 
 " Map j/k combos to get out of insert mode
 inoremap jk <esc>l

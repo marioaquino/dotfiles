@@ -6,10 +6,10 @@ source $HOME/.vim/bundle.vim
 let mapleader = ','
 syntax enable
 
-colorscheme vividchalk
+colorscheme solarized
 set t_Co=256
 " Set console highlights to be readable with black background
-set bg=dark
+set bg=light
 
 " Make GUI colors light on dark
 hi Normal guibg=black guifg=white
@@ -103,6 +103,9 @@ if &term =~ '^screen'
   execute "set <xRight>=\e[1;*C"
   execute "set <xLeft>=\e[1;*D"
 endif
+
+" Search through tags with CtrlP
+nnoremap <leader>. :CtrlPTag<cr>
 
 " Source other settings from files
 "

@@ -7,20 +7,18 @@ if has("gui_macvim")
 " Fullscreen takes up entire screen
   set fuoptions=maxhorz,maxvert
 
-" Command-T for CommandT
+  set guifont=Menlo:h15
+
+" Control P
   macmenu &File.New\ Tab key=<D-T>
-  map <D-t> :CommandT<CR>
-  imap <D-t> <Esc>:CommandT<CR>
+  map <D-t> :CtrlP<CR>
+  imap <D-t> <Esc>:CtrlP<CR>
 
 " Command-Return for fullscreen
   macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
 
 " Command-Shift-F for Ack
   map <D-F> :Ack<space>
-
-" Command-e for ConqueTerm
-  map <D-e> :call StartTerm()<CR>
-
 " Command-/ to toggle comments
   map <D-/> <plug>NERDCommenterToggle<CR>
   imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
@@ -63,14 +61,11 @@ if has("gui_macvim")
   imap <D-M-Left> <C-w>h
 else
 " Ctrl-T for Command-T
-  map <C-t> :CommandT<CR>
-  imap <C-t> <Esc>:CommandT<CR>
+  map <C-t> :CtrlP<CR>
+  imap <C-t> <Esc>:CtrlP<CR>
 
 " Ctrl-Shift-F for Ack
-  map <C-F> :Ack<space>
-
-" Ctrl-e for ConqueTerm
-  map <C-e> :call StartTerm()<CR>
+"  map <C-S-F> :Ack<space>
 
 " Alt-/ to toggle comments
   map <A-/> <plug>NERDCommenterToggle<CR>
@@ -104,18 +99,12 @@ set guioptions-=T
 " Default gui color scheme
 color vividchalk
 
-" ConqueTerm wrapper
-function StartTerm()
-  execute 'ConqueTerm ' . $SHELL . ' --login'
-  setlocal listchars=tab:\ \
-endfunction
-
 " Project Tree
 if exists("loaded_nerd_tree")
   augroup AuNERDTreeCmd
-  autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+  "autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
   autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
-  autocmd AuNERDTreeCmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
+  "autocmd AuNERDTreeCmd WinEnter * call s:CloseIfOnlyNerdTreeLeft()
 endif
 
 " Close all open buffers on entering a window if the only

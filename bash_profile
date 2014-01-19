@@ -4,6 +4,10 @@ source ~/dotfiles/git_completion.bash
 source ~/dotfiles/git_prompt
 source ~/dotfiles/aliases.bash
 
-set -o vi
+source ~/.bashrc
+
+#set -o vi
 
 export TERM=xterm-256color
+
+export PATH=/usr/local/bin:$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
