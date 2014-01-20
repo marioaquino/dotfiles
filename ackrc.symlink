@@ -1,3 +1,5 @@
+--color
+
 # Automatically send output through less (with processing of ANSI color codes) unless piping.
 --pager=less -R
 
