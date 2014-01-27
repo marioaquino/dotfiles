@@ -45,6 +45,7 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'jgdavey/vim-blockle'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'groenewege/vim-less'
 
 Bundle 'kien/ctrlp.vim'
 

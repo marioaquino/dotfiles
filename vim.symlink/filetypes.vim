@@ -14,6 +14,7 @@ endfunction
 
 au BufNewFile,BufRead *.feature set filetype=cucumber
 au BufNewFile,BufRead *.scss set filetype=scss
+au BufNewFile,BufRead *.less set filetype=less
 au BufNewFile,BufRead *.eco set filetype=eco
 au BufNewFile,BufRead *.rabl set filetype=ruby
 au BufNewFile,BufRead *.coffee set filetype=coffee
