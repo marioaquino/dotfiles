@@ -21,11 +21,6 @@ noremap  <C-S>  :update<CR>
 vnoremap <C-S>  <C-C>:update<CR>
 inoremap <C-S>  <C-O>:update<CR>
 
-" Control+Z is Undo, in Normal and Insert mode.
-"
-noremap  <C-Z>  u
-inoremap <C-Z>  <C-O>u
-
 " F7 formats the current/highlighted paragraph.
 "
 " XXX: Consider changing this to gwap to maintain logical cursor position.
