@@ -1,108 +1,40 @@
-# center status
-set -g status-justify centre
-
-# turn on utf8
-set -g status-utf8 on
-
-# set color
-set -g default-terminal "screen-256color"
-
-# pass through fancy key combos (C-Arrows/S-Arrows)
-set-window-option -g xterm-keys on
-
-# minimize delay
-set -sg escape-time 100
-
-# force a reload of the config file
-unbind r
-bind r source-file ~/.tmux.conf; display "Reloaded"
-
-# quick pane cycling
-bind -r b select-pane -t :.+
-
-# The status bar itself.
-set-window-option -g monitor-activity on
-set-option -g status-left-length 60
-set-option -g status-left "#[fg=black]#H #[fg=black]session:window.pane #[fg=black]#S:#I.#P"
-set-option -g status-right-length 45
-set-option -g status-right "%I:%M %p #[fg=yellow]#[fg=green]#(uptime | cut -d ',' -f 4-)"
-
-# Maximize window
-unbind UP
-bind UP new-window -d -n tmux-zoom \; swap-pane -s tmux-zoom.1 \; select-window -t tmux-zoom
-unbind DOWN
-bind DOWN last-window \; swap-pane -s tmux-zoom.1 \; kill-window -t tmux-zoom
-
-# vim movement
-unbind LEFT
-unbind RIGHT
-bind -r h select-pane -L
-bind -r C-h select-window -t :-
-bind -r j select-pane -D
-bind -r k select-pane -U
-bind -r l select-pane -R
-bind -r C-l select-window -t :+
-
-# vim resizes
-bind -r H resize-pane -L 5
-bind -r J resize-pane -D 5
-bind -r K resize-pane -U 5
-bind -r L resize-pane -R 5
-
-set -g default-command /bin/bash
-set -g default-shell /bin/bash
-unbind %
-unbind '"'
-bind | split-window -h
-bind _ split-window -v
-bind -r - resize-pane -D
-bind -r + resize-pane -U
-bind -r < resize-pane -L
-bind -r > resize-pane -R
-
-# notifications
-setw -g monitor-activity on
-setw -g visual-activity on
-
-# auto rename
-set -g automatic-rename
-
-# start window and pane numbering with 1 so left pane is left keyboard key
-set -g base-index 1
-setw -g pane-base-index 1
-
-# open a man page in new pane or window
-unbind m
-unbind M
-bind m command-prompt -p "man page:" "split-window -h 'exec man %%'"
-bind M command-prompt -p "Man page:" "new-window -n 'man %1' 'exec man %1'"
-
-# open a ssh in new pane or window
-unbind s
-unbind S
-bind s command-prompt -p "user@server:" "split-window -h 'exec ssh %%'"
-bind S command-prompt -p "user@server:" "new-window -n 'ssh %1' 'exec ssh %1'"
-
-# vi-style controls in copy mode
-set-option -g status-keys vi
-set-window-option -g mode-keys vi
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
-setw -g mode-keys vi
-unbind [
-bind Escape copy-mode
-unbind p
-unbind ]
-bind p paste-buffer
-
-# put next and previous to [ and ]
-bind -r [ previous-window
-bind -r ] next-window
-
-# Outpace customization
+# Make Ctrl+\ the tmux leader combination
 unbind C-b
 set -g prefix "C-\\"
 bind "C-\\" send-prefix
 setw -g xterm-keys on
+set -g default-terminal "screen-256color"
 set -sg escape-time 0
 set -g base-index 1
+
+
+# Scroll your way into copy mode (scrollback buffer)
+# and select text for copying with the mouse
+set-option -g mouse on
+
+# Copy/paste support
+set-option -g default-command "reattach-to-user-namespace -l bash"
+bind y run "tmux show-buffer | reattach-to-user-namespace pbcopy"
+bind p run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer"
+
+# To copy something from the terminal session (in tmux) into the OS paste buffer, do the following:
+# Ctrl+\ [     (Enter copy mode in tmux)
+#              (move the cursor to where you want to start copying)
+# Ctrl+Space   (enter region highlight mode - like emacs)
+#              (highlight the things you want to copy)
+# Alt+w        (copy the highlighted text to tmux copy buffer)
+# Ctrl+\ y     (copy the tmux copy buffer into the OS copy buffer)
+# Cmd+v        (paste what you've copied into wherever you want in the OS)
+#
+#
+# To copy something from the terminal session (in tmux) into some other place
+# in the terminal (instead of moving into the OS paste buffer)
+# Ctrl+\ [     (Enter copy mode in tmux)
+#              (move the cursor to where you want to start copying)
+# Ctrl+Space   (enter region highlight mode - like emacs)
+#              (highlight the things you want to copy)
+# Alt+w        (copy the highlighted text to tmux copy buffer)
+# Ctrl+\ ]     (paste the copied content into wherever the cursor is)
+
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
